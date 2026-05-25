@@ -83,7 +83,7 @@ public class ClientHandler implements Runnable {
             }
         }
 
-        else if (msg.equalsIgnoreCase("Look")) {
+        else if (msg.equalsIgnoreCase("LOOK")) {
             sendMessage("=== " + currentRoom.name + " ===\n"
                     + currentRoom.description + "\n"
                     + "Exits: " + currentRoom.getExit() + "\n"
@@ -103,7 +103,7 @@ public class ClientHandler implements Runnable {
             sendMessage(who.toString());
         }
 
-        else if (str[0].equalsIgnoreCase("Attack")){
+        else if (str[0].equalsIgnoreCase("ATTACK")){
             if (str.length < 2 || str[1].isEmpty()) {
                 sendMessage("Enter proper name");;
                 return;
@@ -127,6 +127,20 @@ public class ClientHandler implements Runnable {
 
             }
             if (!found) sendMessage("Player not found in this room!!");
+        }
+
+        else if (msg.equalsIgnoreCase("HELP")) {
+            sendMessage(
+                    "=== COMMANDS ===\n" +
+                            "LOOK              - Describe current room\n" +
+                            "NORTH/SOUTH/EAST/WEST - Move between rooms\n" +
+                            "ATTACK <name>     - Attack a player in your room\n" +
+                            "SAY <message>     - Chat in current room\n" +
+                            "WHO               - List all online players\n" +
+                            "STATS             - Show your stats\n" +
+                            "RESPAWN           - Respawn after death\n" +
+                            "HELP              - Show this message"
+            );
         }
 
         else if (msg.equalsIgnoreCase("NORTH")) move(currentRoom.north);
