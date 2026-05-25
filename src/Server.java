@@ -40,6 +40,8 @@ public class Server{
 
             ClientsConnected.add(handler);
 
+            handler.broadcast(ClientName + " has joined the lobby");
+
             ClientID++;
 
             Thread thread = new Thread(handler);
